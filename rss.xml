@@ -10,9 +10,108 @@
         </author>
         <description>anoxia的后端博客</description>
         <language>zh-CN</language>
-        <pubDate>Sun, 06 Aug 2023 00:00:00 +0800</pubDate>
-        <lastBuildDate>Sun, 06 Aug 2023 00:00:00 +0800</lastBuildDate>
+        <pubDate>Mon, 07 Aug 2023 00:00:00 +0800</pubDate>
+        <lastBuildDate>Mon, 07 Aug 2023 00:00:00 +0800</lastBuildDate>
         <category term="起源" />
+        <item>
+            <guid isPermalink="true">http://127.0.0.1/project/bug%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3/</guid>
+            <title>项目常见问题</title>
+            <link>http://127.0.0.1/project/bug%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3/</link>
+            <category term="项目总结" scheme="http://127.0.0.1/categories/project/" />
+            <category term="Mysql" scheme="http://127.0.0.1/tags/Mysql/" />
+            <category term="bug" scheme="http://127.0.0.1/tags/bug/" />
+            <pubDate>Mon, 07 Aug 2023 00:00:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h3 id=&#34;maven问题&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#maven问题&#34;&gt;#&lt;/a&gt; Maven 问题&lt;/h3&gt;
+&lt;h4 id=&#34;maven右侧出现root字样&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#maven右侧出现root字样&#34;&gt;#&lt;/a&gt; maven 右侧出现 root 字样&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;问题原因：由于父工程未导入该子模块，所以 maven 认为该模块为根模块.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;解决方法:&lt;/p&gt;
+&lt;figure class=&#34;highlight xml&#34;&gt;&lt;figcaption data-lang=&#34;XML&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;lt;&lt;/span&gt;modules&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;lt;&lt;/span&gt;module&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;lt;/&lt;/span&gt;module&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&gt;&lt;/span&gt;&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;&amp;lt;!-- 此处放置该子模块 --&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;lt;/&lt;/span&gt;modules&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;java问题&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#java问题&#34;&gt;#&lt;/a&gt; JAVA 问题&lt;/h3&gt;
+&lt;h4 id=&#34;使用排除注解所遇问题&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#使用排除注解所遇问题&#34;&gt;#&lt;/a&gt; 使用排除注解所遇问题&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;问题代码:&lt;/p&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;figcaption data-lang=&#34;java&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token class-name&#34;&gt;&lt;span class=&#34;token namespace&#34;&gt;java&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;lang&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;/span&gt;IllegalStateException&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;The&lt;/span&gt; following classes could not be excluded because they are not auto&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;configuration classes&lt;span class=&#34;token operator&#34;&gt;:&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;figure class=&#34;highlight java&#34;&gt;&lt;figcaption data-lang=&#34;java&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;xxxxxxxxxx6 &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;private &lt;span class=&#34;token class-name&#34;&gt;LocalDateTime&lt;/span&gt; createTime&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;​&lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;setCreateTime&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token class-name&#34;&gt;Date&lt;/span&gt; createTime&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;LocalDateTime&lt;/span&gt; localDateTime &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; createTime&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;toInstant&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;atZone&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token class-name&#34;&gt;ZoneId&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;systemDefault&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;toLocalDateTime&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;span class=&#34;token number&#34;&gt;5&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;createTime &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; localDateTime&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;6&lt;/span&gt;    &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;java&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;解决办法:&lt;/p&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;figcaption data-lang=&#34;java&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token annotation punctuation&#34;&gt;@SpringBootApplication&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;exclude &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;span class=&#34;token class-name&#34;&gt;DataSourceAutoConfiguration&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;查看一下类是否写错了，修改即可.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;mapperscan无法注入&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#mapperscan无法注入&#34;&gt;#&lt;/a&gt; mapperscan 无法注入&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;问题描述：在代码界面，红色警告（启动程序并无异常）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;问题原因：mapper 类是使用的 mybatis 生成的，spring 无法检测出，但运行没有问题。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;解决办法：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;禁止红色警告（不建议，因为别的地方如果自动装配出问题无法及时发现）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在 mapper 类加入 @Mapper 注解（mybatis 自带注解，没导入 mybatis 的话，要在启动类加入 @mapperscan）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在 mapper 类加入 @Repository 注解跟 mapperscan 结合（spring 自带注解）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;nacos异常&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#nacos异常&#34;&gt;#&lt;/a&gt; nacos 异常&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;问题代码：&lt;/p&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;figcaption data-lang=&#34;java&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token class-name&#34;&gt;Failed&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;to&lt;/span&gt; &lt;span class=&#34;token namespace&#34;&gt;start&lt;/span&gt; bean &#39;nacosWatch&#39;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; nested exception is &lt;span class=&#34;token class-name&#34;&gt;&lt;span class=&#34;token namespace&#34;&gt;java&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;lang&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;/span&gt;RuntimeException&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;ErrCode&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;400&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;问题原因：pom 文件导入的 nacos 版本和 springboot 版本不兼容。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;解决办法：&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9jbG91ZC50ZW5jZW50LmNvbS9kZXZlbG9wZXIvYXJ0aWNsZS8xNzM1Mzky&#34;&gt;点击查看对应版本&lt;/span&gt;，重新导入即可对应版本。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">http://127.0.0.1/project/Mysql%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/</guid>
+            <title>连接数据库遇到问题</title>
+            <link>http://127.0.0.1/project/Mysql%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/</link>
+            <category term="项目总结" scheme="http://127.0.0.1/categories/project/" />
+            <category term="Mysql" scheme="http://127.0.0.1/tags/Mysql/" />
+            <category term="bug" scheme="http://127.0.0.1/tags/bug/" />
+            <pubDate>Mon, 07 Aug 2023 00:00:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h3 id=&#34;1-时区转换问题&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1-时区转换问题&#34;&gt;#&lt;/a&gt; 1. 时区转换问题&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;相信大多数人都遇见过数据库时间提取到 Java 对象之后，发生时间不一致的问题&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;连接数据库的时候若不设置，就会引发时区转换的问题，其原因是因为:&lt;br /&gt;
+&lt;mark&gt; 咱们所在时区为东八区，而默认时区为 0 区，差距八个小时，所以每次在与数据库交互时就会发生八小时的误差，&lt;/mark&gt;&lt;br /&gt;
+ 若要解决此问题，就要在连接数据库时设置配置:&lt;/p&gt;
+&lt;figure class=&#34;highlight yaml&#34;&gt;&lt;figcaption data-lang=&#34;YAML&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;jdbc&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;mysql&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//localhost&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;3306/friend&lt;span class=&#34;token punctuation&#34;&gt;?&lt;/span&gt;useSSL=false&lt;span class=&#34;token important&#34;&gt;&amp;amp;serverTimezone=Asia/Shanghai&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;&amp;amp; 后面便是设置的时区，设置之后在与 mysql 交互的时候就不会发生时区的问题了。&lt;/p&gt;
+&lt;h3 id=&#34;2数据库字段创建时间和修改时间&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2数据库字段创建时间和修改时间&#34;&gt;#&lt;/a&gt; 2. 数据库字段创建时间和修改时间&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;很多的数据库表都需要有创建时间和修改时间，此时就会引发许多问题&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如果是在 Java 类中自己设置时间过于麻烦，此时便可以在数据库建表的时候设置&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt; create_time   timestamp default CURRENT_TIMESTAMP not null comment &#39;创建时间&#39;,
+ update_time   timestamp default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment &#39;修改时间&#39;,
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;创建表的时候进行以上的设置便能在插入字段和修改字段的时候，数据库自动修改时间&lt;/p&gt;
+&lt;h3 id=&#34;3数据库时间转换问题&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#3数据库时间转换问题&#34;&gt;#&lt;/a&gt; 3. 数据库时间转换问题&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;数据库的 timestamp 时间为时间戳，如果转换到 Java 里面就会遇见一些问题&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;若是 Java 字段直接用 date 数据接收的话也可以，但是和前端交互的时候就会有格式问题，date 的格式直接发送给前端的话，用户看的话不是特别方便，如果每次发送给前端都要转换就显得有些麻烦&lt;br /&gt;
+此时可以在 pojo 类中设置为 localdatetime 类型，修改一下 set 代码，便可成功接收.&lt;/p&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;figcaption data-lang=&#34;java&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;LocalDateTime&lt;/span&gt; createTime&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;setCreateTime&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token class-name&#34;&gt;Date&lt;/span&gt; createTime&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token class-name&#34;&gt;LocalDateTime&lt;/span&gt; localDateTime &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; createTime&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;toInstant&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;atZone&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token class-name&#34;&gt;ZoneId&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;systemDefault&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;toLocalDateTime&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token keyword&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;createTime &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; localDateTime&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt; ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">http://127.0.0.1/interview/MySQL%E9%9D%A2%E8%AF%95%E9%A2%98-%E5%8F%82%E8%80%83%E5%9B%9E%E7%AD%94/</guid>
             <title>Mysql相关面试题</title>
@@ -241,6 +340,9 @@
 &lt;p&gt;其中 Redis 的网络模型就是使用 I/O 多路复用结合事件的处理器来应对多个 Socket 请求，比如，提供了连接应答处理器、命令回复处理器，命令请求处理器；&lt;/p&gt;
 &lt;p&gt;在 Redis6.0 之后，为了提升更好的性能，在命令回复处理器使用了多线程来处理回复事件，在命令请求处理器中，将命令的转换使用了多线程，增加命令转换速度，在命令执行的时候，依然是单线程&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;本文引自黑马程序员 Java 面试宝典&lt;/li&gt;
+&lt;/ul&gt;
  ]]></description>
         </item>
     </channel>
