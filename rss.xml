@@ -3,8 +3,8 @@
     <channel>
         <title></title>
         <subtitle>欢迎来到智慧笔记~这里主要会记录编程学习笔记🌸</subtitle>
-        <icon>http://zero-yuan.gitee.io/images/favicon.ico</icon>
-        <link>http://zero-yuan.gitee.io</link>
+        <icon>https://lin0yuan.github.io/images/favicon.ico</icon>
+        <link>https://lin0yuan.github.io</link>
         <author>
           <name>anoxia</name>
         </author>
@@ -14,11 +14,11 @@
         <lastBuildDate>Sun, 13 Aug 2023 00:00:00 +0800</lastBuildDate>
         <category term="起源" />
         <item>
-            <guid isPermalink="true">http://zero-yuan.gitee.io/interview/Java%E9%9B%86%E5%90%88%E7%9B%B8%E5%85%B3%E9%9D%A2%E8%AF%95%E9%A2%98/</guid>
+            <guid isPermalink="true">https://lin0yuan.github.io/interview/Java%E9%9B%86%E5%90%88%E7%9B%B8%E5%85%B3%E9%9D%A2%E8%AF%95%E9%A2%98/</guid>
             <title>Java集合相关面试题</title>
-            <link>http://zero-yuan.gitee.io/interview/Java%E9%9B%86%E5%90%88%E7%9B%B8%E5%85%B3%E9%9D%A2%E8%AF%95%E9%A2%98/</link>
-            <category term="面经" scheme="http://zero-yuan.gitee.io/categories/interview/" />
-            <category term="Java基础" scheme="http://zero-yuan.gitee.io/tags/Java%E5%9F%BA%E7%A1%80/" />
+            <link>https://lin0yuan.github.io/interview/Java%E9%9B%86%E5%90%88%E7%9B%B8%E5%85%B3%E9%9D%A2%E8%AF%95%E9%A2%98/</link>
+            <category term="面经" scheme="https://lin0yuan.github.io/categories/interview/" />
+            <category term="Java基础" scheme="https://lin0yuan.github.io/tags/Java%E5%9F%BA%E7%A1%80/" />
             <pubDate>Sun, 13 Aug 2023 00:00:00 +0800</pubDate>
             <description><![CDATA[ &lt;h2 id=&#34;前言&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#前言&#34;&gt;#&lt;/a&gt; 前言&lt;/h2&gt;
 &lt;p&gt;这次课程主要涉及到的是 List 和 Map 相关的面试题，比较高频就是&lt;/p&gt;
@@ -888,11 +888,11 @@
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">http://zero-yuan.gitee.io/interview/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6%E9%9D%A2%E8%AF%95%E9%A2%98-%E5%8F%82%E8%80%83%E5%9B%9E%E7%AD%94/</guid>
+            <guid isPermalink="true">https://lin0yuan.github.io/interview/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6%E9%9D%A2%E8%AF%95%E9%A2%98-%E5%8F%82%E8%80%83%E5%9B%9E%E7%AD%94/</guid>
             <title>消息中间件相关面试题</title>
-            <link>http://zero-yuan.gitee.io/interview/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6%E9%9D%A2%E8%AF%95%E9%A2%98-%E5%8F%82%E8%80%83%E5%9B%9E%E7%AD%94/</link>
-            <category term="面经" scheme="http://zero-yuan.gitee.io/categories/interview/" />
-            <category term="微服务" scheme="http://zero-yuan.gitee.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" />
+            <link>https://lin0yuan.github.io/interview/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6%E9%9D%A2%E8%AF%95%E9%A2%98-%E5%8F%82%E8%80%83%E5%9B%9E%E7%AD%94/</link>
+            <category term="面经" scheme="https://lin0yuan.github.io/categories/interview/" />
+            <category term="微服务" scheme="https://lin0yuan.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" />
             <pubDate>Sat, 12 Aug 2023 00:00:00 +0800</pubDate>
             <description><![CDATA[ &lt;h3 id=&#34;面试官rabbitmq-如何保证消息不丢失&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#面试官rabbitmq-如何保证消息不丢失&#34;&gt;#&lt;/a&gt; 面试官：RabbitMQ - 如何保证消息不丢失&lt;/h3&gt;
 &lt;blockquote&gt;
@@ -1007,11 +1007,11 @@
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">http://zero-yuan.gitee.io/interview/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%9D%A2%E8%AF%95%E9%A2%98-%E5%8F%82%E8%80%83%E5%9B%9E%E7%AD%94/</guid>
+            <guid isPermalink="true">https://lin0yuan.github.io/interview/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%9D%A2%E8%AF%95%E9%A2%98-%E5%8F%82%E8%80%83%E5%9B%9E%E7%AD%94/</guid>
             <title>微服务相关面试题</title>
-            <link>http://zero-yuan.gitee.io/interview/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%9D%A2%E8%AF%95%E9%A2%98-%E5%8F%82%E8%80%83%E5%9B%9E%E7%AD%94/</link>
-            <category term="面经" scheme="http://zero-yuan.gitee.io/categories/interview/" />
-            <category term="微服务" scheme="http://zero-yuan.gitee.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" />
+            <link>https://lin0yuan.github.io/interview/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%9D%A2%E8%AF%95%E9%A2%98-%E5%8F%82%E8%80%83%E5%9B%9E%E7%AD%94/</link>
+            <category term="面经" scheme="https://lin0yuan.github.io/categories/interview/" />
+            <category term="微服务" scheme="https://lin0yuan.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" />
             <pubDate>Fri, 11 Aug 2023 00:00:00 +0800</pubDate>
             <description><![CDATA[ &lt;h3 id=&#34;面试官spring-cloud-5大组件有哪些&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#面试官spring-cloud-5大组件有哪些&#34;&gt;#&lt;/a&gt; 面试官：Spring Cloud 5 大组件有哪些？&lt;/h3&gt;
 &lt;blockquote&gt;
@@ -1204,11 +1204,11 @@
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">http://zero-yuan.gitee.io/interview/Spring%E9%9D%A2%E8%AF%95%E9%A2%98-%E5%8F%82%E8%80%83%E5%9B%9E%E7%AD%94/</guid>
+            <guid isPermalink="true">https://lin0yuan.github.io/interview/Spring%E9%9D%A2%E8%AF%95%E9%A2%98-%E5%8F%82%E8%80%83%E5%9B%9E%E7%AD%94/</guid>
             <title>Spring相关面试题</title>
-            <link>http://zero-yuan.gitee.io/interview/Spring%E9%9D%A2%E8%AF%95%E9%A2%98-%E5%8F%82%E8%80%83%E5%9B%9E%E7%AD%94/</link>
-            <category term="面经" scheme="http://zero-yuan.gitee.io/categories/interview/" />
-            <category term="Spring" scheme="http://zero-yuan.gitee.io/tags/Spring/" />
+            <link>https://lin0yuan.github.io/interview/Spring%E9%9D%A2%E8%AF%95%E9%A2%98-%E5%8F%82%E8%80%83%E5%9B%9E%E7%AD%94/</link>
+            <category term="面经" scheme="https://lin0yuan.github.io/categories/interview/" />
+            <category term="Spring" scheme="https://lin0yuan.github.io/tags/Spring/" />
             <pubDate>Thu, 10 Aug 2023 00:00:00 +0800</pubDate>
             <description><![CDATA[ &lt;blockquote&gt;
 &lt;p&gt;本文引用 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuYmlsaWJpbGkuY29tL3ZpZGVvL0JWMXlUNDExSDdZSy8=&#34;&gt;黑马程序员 Java 面试宝典&lt;/span&gt;&lt;/p&gt;
@@ -1402,10 +1402,10 @@
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">http://zero-yuan.gitee.io/HTTP%E5%92%8CWebsocket%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/</guid>
+            <guid isPermalink="true">https://lin0yuan.github.io/HTTP%E5%92%8CWebsocket%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/</guid>
             <title>HTTP和Websocket的前世今生</title>
-            <link>http://zero-yuan.gitee.io/HTTP%E5%92%8CWebsocket%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/</link>
-            <category term="计算机基础" scheme="http://zero-yuan.gitee.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" />
+            <link>https://lin0yuan.github.io/HTTP%E5%92%8CWebsocket%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/</link>
+            <category term="计算机基础" scheme="https://lin0yuan.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" />
             <pubDate>Wed, 09 Aug 2023 00:00:00 +0800</pubDate>
             <description><![CDATA[ &lt;p&gt;&lt;img data-src=&#34;https://raw.githubusercontent.com/lin0yuan/Image/master/f4e0159841ab450d861dde9e8fb5ba0d.gif&#34; alt=&#34;csdn&#34; /&gt;&lt;/p&gt;
 &lt;blockquote&gt;
@@ -1553,11 +1553,11 @@
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">http://zero-yuan.gitee.io/redis/%E8%AF%BB%E5%86%99%E4%B8%80%E8%87%B4%E9%97%AE%E9%A2%98/</guid>
+            <guid isPermalink="true">https://lin0yuan.github.io/redis/%E8%AF%BB%E5%86%99%E4%B8%80%E8%87%B4%E9%97%AE%E9%A2%98/</guid>
             <title>关于缓存读写一致问题</title>
-            <link>http://zero-yuan.gitee.io/redis/%E8%AF%BB%E5%86%99%E4%B8%80%E8%87%B4%E9%97%AE%E9%A2%98/</link>
-            <category term="Redis" scheme="http://zero-yuan.gitee.io/categories/redis/" />
-            <category term="Redis" scheme="http://zero-yuan.gitee.io/tags/Redis/" />
+            <link>https://lin0yuan.github.io/redis/%E8%AF%BB%E5%86%99%E4%B8%80%E8%87%B4%E9%97%AE%E9%A2%98/</link>
+            <category term="Redis" scheme="https://lin0yuan.github.io/categories/redis/" />
+            <category term="Redis" scheme="https://lin0yuan.github.io/tags/Redis/" />
             <pubDate>Tue, 08 Aug 2023 00:00:00 +0800</pubDate>
             <description><![CDATA[ &lt;blockquote&gt;
 &lt;p&gt;📝个人博客：&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl82MTk1NzI4OT90eXBlPWJsb2c=&#34;&gt;零元&lt;/span&gt;&lt;/p&gt;
@@ -1650,12 +1650,12 @@ Canal 的主要特性包括：&lt;/p&gt;
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">http://zero-yuan.gitee.io/project/bug%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3/</guid>
+            <guid isPermalink="true">https://lin0yuan.github.io/project/bug%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3/</guid>
             <title>项目常见问题</title>
-            <link>http://zero-yuan.gitee.io/project/bug%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3/</link>
-            <category term="项目总结" scheme="http://zero-yuan.gitee.io/categories/project/" />
-            <category term="Mysql" scheme="http://zero-yuan.gitee.io/tags/Mysql/" />
-            <category term="bug" scheme="http://zero-yuan.gitee.io/tags/bug/" />
+            <link>https://lin0yuan.github.io/project/bug%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3/</link>
+            <category term="项目总结" scheme="https://lin0yuan.github.io/categories/project/" />
+            <category term="Mysql" scheme="https://lin0yuan.github.io/tags/Mysql/" />
+            <category term="bug" scheme="https://lin0yuan.github.io/tags/bug/" />
             <pubDate>Mon, 07 Aug 2023 00:00:00 +0800</pubDate>
             <description><![CDATA[ &lt;h3 id=&#34;maven问题&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#maven问题&#34;&gt;#&lt;/a&gt; Maven 问题&lt;/h3&gt;
 &lt;h4 id=&#34;maven右侧出现root字样&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#maven右侧出现root字样&#34;&gt;#&lt;/a&gt; maven 右侧出现 root 字样&lt;/h4&gt;
@@ -1716,12 +1716,12 @@ Canal 的主要特性包括：&lt;/p&gt;
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">http://zero-yuan.gitee.io/project/Mysql%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/</guid>
+            <guid isPermalink="true">https://lin0yuan.github.io/project/Mysql%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/</guid>
             <title>连接数据库遇到问题</title>
-            <link>http://zero-yuan.gitee.io/project/Mysql%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/</link>
-            <category term="项目总结" scheme="http://zero-yuan.gitee.io/categories/project/" />
-            <category term="Mysql" scheme="http://zero-yuan.gitee.io/tags/Mysql/" />
-            <category term="bug" scheme="http://zero-yuan.gitee.io/tags/bug/" />
+            <link>https://lin0yuan.github.io/project/Mysql%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/</link>
+            <category term="项目总结" scheme="https://lin0yuan.github.io/categories/project/" />
+            <category term="Mysql" scheme="https://lin0yuan.github.io/tags/Mysql/" />
+            <category term="bug" scheme="https://lin0yuan.github.io/tags/bug/" />
             <pubDate>Mon, 07 Aug 2023 00:00:00 +0800</pubDate>
             <description><![CDATA[ &lt;h3 id=&#34;1-时区转换问题&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1-时区转换问题&#34;&gt;#&lt;/a&gt; 1. 时区转换问题&lt;/h3&gt;
 &lt;blockquote&gt;
@@ -1749,11 +1749,11 @@ Canal 的主要特性包括：&lt;/p&gt;
 &lt;figure class=&#34;highlight java&#34;&gt;&lt;figcaption data-lang=&#34;java&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;LocalDateTime&lt;/span&gt; createTime&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;setCreateTime&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token class-name&#34;&gt;Date&lt;/span&gt; createTime&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token class-name&#34;&gt;LocalDateTime&lt;/span&gt; localDateTime &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; createTime&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;toInstant&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;atZone&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token class-name&#34;&gt;ZoneId&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;systemDefault&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;toLocalDateTime&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token keyword&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;createTime &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; localDateTime&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt; ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">http://zero-yuan.gitee.io/interview/MySQL%E9%9D%A2%E8%AF%95%E9%A2%98-%E5%8F%82%E8%80%83%E5%9B%9E%E7%AD%94/</guid>
+            <guid isPermalink="true">https://lin0yuan.github.io/interview/MySQL%E9%9D%A2%E8%AF%95%E9%A2%98-%E5%8F%82%E8%80%83%E5%9B%9E%E7%AD%94/</guid>
             <title>Mysql相关面试题</title>
-            <link>http://zero-yuan.gitee.io/interview/MySQL%E9%9D%A2%E8%AF%95%E9%A2%98-%E5%8F%82%E8%80%83%E5%9B%9E%E7%AD%94/</link>
-            <category term="面经" scheme="http://zero-yuan.gitee.io/categories/interview/" />
-            <category term="Mysql" scheme="http://zero-yuan.gitee.io/tags/Mysql/" />
+            <link>https://lin0yuan.github.io/interview/MySQL%E9%9D%A2%E8%AF%95%E9%A2%98-%E5%8F%82%E8%80%83%E5%9B%9E%E7%AD%94/</link>
+            <category term="面经" scheme="https://lin0yuan.github.io/categories/interview/" />
+            <category term="Mysql" scheme="https://lin0yuan.github.io/tags/Mysql/" />
             <pubDate>Sun, 06 Aug 2023 00:00:00 +0800</pubDate>
             <description><![CDATA[ &lt;h3 id=&#34;面试官mysql中如何定位慢查询&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#面试官mysql中如何定位慢查询&#34;&gt;#&lt;/a&gt; 面试官：MySQL 中，如何定位慢查询？&lt;/h3&gt;
 &lt;blockquote&gt;
@@ -1891,11 +1891,11 @@ Canal 的主要特性包括：&lt;/p&gt;
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">http://zero-yuan.gitee.io/interview/Redis%E9%9D%A2%E8%AF%95%E9%A2%98-%E5%8F%82%E8%80%83%E5%9B%9E%E7%AD%94/</guid>
+            <guid isPermalink="true">https://lin0yuan.github.io/interview/Redis%E9%9D%A2%E8%AF%95%E9%A2%98-%E5%8F%82%E8%80%83%E5%9B%9E%E7%AD%94/</guid>
             <title>Redis相关面试题</title>
-            <link>http://zero-yuan.gitee.io/interview/Redis%E9%9D%A2%E8%AF%95%E9%A2%98-%E5%8F%82%E8%80%83%E5%9B%9E%E7%AD%94/</link>
-            <category term="面经" scheme="http://zero-yuan.gitee.io/categories/interview/" />
-            <category term="Redis" scheme="http://zero-yuan.gitee.io/tags/Redis/" />
+            <link>https://lin0yuan.github.io/interview/Redis%E9%9D%A2%E8%AF%95%E9%A2%98-%E5%8F%82%E8%80%83%E5%9B%9E%E7%AD%94/</link>
+            <category term="面经" scheme="https://lin0yuan.github.io/categories/interview/" />
+            <category term="Redis" scheme="https://lin0yuan.github.io/tags/Redis/" />
             <pubDate>Sun, 06 Aug 2023 00:00:00 +0800</pubDate>
             <description><![CDATA[ &lt;h3 id=&#34;面试官什么是缓存穿透-怎么解决&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#面试官什么是缓存穿透-怎么解决&#34;&gt;#&lt;/a&gt; 面试官：什么是缓存穿透？怎么解决？&lt;/h3&gt;
 &lt;blockquote&gt;
