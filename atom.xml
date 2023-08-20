@@ -8,8 +8,217 @@
     <author>
       <name>anoxia</name>
     </author>
-    <updated>2023-08-14T16:00:00.000Z</updated>
+    <updated>2023-08-19T16:00:00.000Z</updated>
     <category term="起源" />
+    <entry>
+        <id>https://anoxiahub.github.io/special/Redis%E4%B8%93%E9%A1%B9%E9%A2%98%E5%BA%93/</id>
+        <title>Redis专项题库-个人练习</title>
+        <link rel="alternate" href="https://anoxiahub.github.io/special/Redis%E4%B8%93%E9%A1%B9%E9%A2%98%E5%BA%93/"/>
+        <content type="html">&lt;h2 id=&#34;对象&#34;&gt;&lt;a href=&#34;#对象&#34; class=&#34;headerlink&#34; title=&#34;对象&#34;&gt;&lt;/a&gt;对象&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Set一个已有的数据会发生什么?&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;原来数据的元素被覆盖掉&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt; &lt;strong&gt;浮点型在String是用什么表示？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用字符串表示，进行自增加减操作转化为浮点型操作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;String可以有多大？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;512MB&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Redis字符串是怎么实现的？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;int整型通过int编码实现，&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;小于等于39(redis设计与实现32)字节是embstr编码(只是可读的，修改的话变为raw编码)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;否则为raw编码&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;raw和embstr编码底层都是SDS实现，embstr一次分配到redisObject上，raw动态分配到redisObject&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;为什么EMBSTR的阈值是44？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;初始redisObject 分配64字节，redisObject对象占16字节—&amp;gt;48字节&lt;/li&gt;
+&lt;li&gt;3.2版本之前：len和free使用unsigned int类型一共占用8个字节，‘&amp;#x2F;0’占一个字节，剩余48-8-1&amp;#x3D;39字节&lt;/li&gt;
+&lt;li&gt;3.2之后：len和alloc使用uint8_t类型一共两个字节，flags(表示数组类型sdshdr8还是sdshdr16)使用unsigned char类型占用1个字节，‘&amp;#x2F;0’一个字节，剩余48-2-1-1&amp;#x3D;44字节&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;你知道为什么EMBSTR曾经的阈值是39吗？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;3.2之前，int型len和free占8个字节，‘&amp;#x2F;0’占1个字节，redisObject占16个字节，所以是39字节&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt; &lt;strong&gt;SDS有什么用？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SDS存储有数组长度，所以字符串长度时间复杂度是o(1)&lt;/li&gt;
+&lt;li&gt;SDS能够支持二进制字符串，因为SDS不是以’\0’来判断字符串是否结束，而是以长度判断&lt;/li&gt;
+&lt;li&gt;SDS减少内存重分配，每次增加减少字符串通过修改free的方式来修改&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;List是完全先入先出吗？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不是，list底层紧凑列表(5.0之前压缩列表)或者双向队列，不完全是先进先出&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;List对象底层编码方式是什么？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;底层是压缩列表或者双向链表&lt;/li&gt;
+&lt;li&gt;压缩列表小于64字节或者元素数量小于512&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;ZIPLIST是怎么压缩数据的？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;没有使用指针，物理上相连的内存&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;ZIPLIST下List可以从后往前遍历吗？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;可以从后往前遍历，因为ZIPLIST里面entry结构存储的有上一个数据的长度，可以根据长度找出上一个节点的起始位置，进行遍历&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt; &lt;strong&gt;在ZIPLIST数据结构下，查询节点个数的时间复杂度是多少？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;O(1)，因为ZIPLIST里面存储有节点个数的数据结构&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt; &lt;strong&gt;LINKEDLIST编码下，查询节点个数的时间复杂度是多少？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;o(1)，LINKEDLIST里面存储有节点个数的数据结构&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Set编码方式？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;整数集合(元素全是整数或者数量小于512)&lt;/li&gt;
+&lt;li&gt;字典&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Set是有序的吗？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不是有序的，整型集合排列是按大小顺序的，而不是插入顺序&lt;/li&gt;
+&lt;li&gt;字典不是有序的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;HSet的编码方式是什么？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;字典&lt;/li&gt;
+&lt;li&gt;紧凑列表(3.2之前压缩列表，小于512元素，或者小于64字节)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;HSet查找某个key的平均时间复杂度是多少？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;字典o(1)&lt;/li&gt;
+&lt;li&gt;压缩列表o(n)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Redis中HashTable查找元素总数的平均时间复杂度是多少?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;o(1)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;跳表中一个节点的层高是怎么决定的？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;每一个节点插入会生成一个随机数，如果随机数大小小于25%，增加一层高度，否则就为当前高度&lt;/p&gt;
+&lt;h2 id=&#34;Redis执行&#34;&gt;&lt;a href=&#34;#Redis执行&#34; class=&#34;headerlink&#34; title=&#34;Redis执行&#34;&gt;&lt;/a&gt;Redis执行&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Redis是单线程还是多线程&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Redis工作线程是单线程，IO操作线程是多线程，后台清理脏数据，大key清楚(4.0之后)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Redis为什么选择单线程做核心处理&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Redis是基于内存的操作的，Redis的上限取决于网络IO的速度，而不是CPU的速度，所以单线程能更好的利用CPU资源&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Redis单线程性能如何&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;单线程进行数据操作很快，写性能大概11w，读大概15w&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;为什么单线程还能这么快&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;因为redis是基于内存的&lt;/li&gt;
+&lt;li&gt;redis内存结构非常高效&lt;/li&gt;
+&lt;li&gt;IO多路复用让网络IO这块的短板提升很多性能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Redis6.0之后引入了多线程，你知道为什么吗？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;避免Redis由于网络io而影响性能&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Redis6.0的多线程是默认开启的吗？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;默认禁用的，需要在conf文件开启多线程&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Redis6.0的多线程主要负责命令执行的哪一块&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;主要负责网络IO那块，从网卡读取数据到本地工作队列，交由主线程进行数据操作&lt;/p&gt;
+&lt;h2 id=&#34;Redis持久化&#34;&gt;&lt;a href=&#34;#Redis持久化&#34; class=&#34;headerlink&#34; title=&#34;Redis持久化&#34;&gt;&lt;/a&gt;Redis持久化&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;RDB和AOF本质区别是什么？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;RDB是快照，将这个时刻的数据以二进制形式复刻备份成文件&lt;/li&gt;
+&lt;li&gt;AOF是将每次数据操作加入到日志文件中&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;如果RDB和AOF只能选一种，你选哪个？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果接收一定的数据丢失换取性能可以用RDB&lt;/li&gt;
+&lt;li&gt;如果要求数据必须可靠，混合使用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;RDB的触发时机?&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;redis关闭前&lt;/li&gt;
+&lt;li&gt;客户端执行save或者bgsave&lt;/li&gt;
+&lt;li&gt;主从进行全量复制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;AOF的触发时机?&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;redis关闭前&lt;/li&gt;
+&lt;li&gt;事件循环时&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;RDB对主流程有什么影响？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;save命令会阻塞主线程&lt;/li&gt;
+&lt;li&gt;bgsave会fork一个子进程，有时间开销，另外bgsave是写时复制，如果数据量大的话，复制就会有cpu损耗&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;AOF混合持久化方案是什么？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在AOF重写的时候，原来数据使用二进制记录，新增数据使用命令格式记录&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;简单描述AOF重写流程&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;首先fork一个子进程，从数据库里读取所有数据&lt;/li&gt;
+&lt;li&gt;新增的数据放入AOF缓冲文件和AOF重写缓冲文件中，另外通过管道将重写缓冲文件数据传递给给子进程&lt;/li&gt;
+&lt;li&gt;子进程将重写后的文件覆盖到原文件上&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;AOF重写你觉得有什么不足之处么？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;父进程同时写AOF缓冲日志和AOF重写缓冲日志，额外的开销&lt;/li&gt;
+&lt;li&gt;将AOF重写缓冲日志通过管道写到子进程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt; &lt;strong&gt;针对AOF重写的不足，你有什么优化思路呢？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;开一个子进程将当前数据重写进AOF日志文件&lt;/li&gt;
+&lt;li&gt;父进程将当前新的数据写进AOF新增日志文件&lt;/li&gt;
+&lt;li&gt;然后将两个日志文件合并&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;Redis场景&#34;&gt;&lt;a href=&#34;#Redis场景&#34; class=&#34;headerlink&#34; title=&#34;Redis场景&#34;&gt;&lt;/a&gt;Redis场景&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;你有实际使用过Redis做什么应用么？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一般用来存储session数据&lt;/li&gt;
+&lt;li&gt;存储一些不厂修改的数据&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt; &lt;strong&gt;Redis缓存是如何应用的？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt; &lt;strong&gt;Redis做旁路缓存，如果MySQL更新了，此时何去何从？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果要求强一致性，先加读写锁，修改数据库数据，删除缓存，释放锁&lt;/li&gt;
+&lt;li&gt;要求最终一致性，先更新数据库，再删除缓存&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt; &lt;strong&gt;Redis做秒杀场景可以吗？讲讲思路&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Redis可以做消息队列吗？什么时候能用Redis做消息队列？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt; &lt;strong&gt;分布式锁实现要点是什么（其实就是怎么加锁、怎么解锁、怎么用）？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt; &lt;strong&gt;缓存问题（缓存穿透，缓存击穿，缓存雪崩）&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;缓存穿透:&lt;/p&gt;
+&lt;p&gt;当前请求数据未在缓存中存储，因此会到数据库中访问，但数据库也没有该数据，通过这个请求恶意攻击服务器，导致所有请求全部打到数据库中，引起数据库宕机&lt;/p&gt;
+&lt;p&gt;解决方法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;缓存null值：当请求到数据库时，没有该数据，将该数据缓存到redis中，值为null，以后所有数据就只访问到缓存，而不会影响数据库&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;布隆过滤器：通过若干个hash函数，将请求的数据求出对应hash值，如果对应hash值在对应数组都为1，则表示存在该数据&lt;/p&gt;
+&lt;p&gt;数值全部为1不一定存在，但不全为1，一定不存在&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;缓存击穿：&lt;/p&gt;
+&lt;p&gt;某个热点数据在缓存中过期，此刻大量请求同时访问该数据，由于缓存中没有该数据，所有数据就会打到数据库中，导致服务器宕机&lt;/p&gt;
+&lt;p&gt;解决办法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;加锁：只能一个请求访问数据库，但会导致请求响应时间过长&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;设置逻辑过期：在缓存中查询到该数据，如果逻辑过期，新开一个线程，加一个互斥锁，之前所有线程返回旧数据，新增线程访问数据库&lt;/p&gt;
+&lt;p&gt;缺点：数据没有一致性&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;缓存雪崩：&lt;/p&gt;
+&lt;p&gt;多个热点数据同时过期，大量请求同时访问多个数据，导致所有请求打到数据库上，导致数据库宕机&lt;/p&gt;
+&lt;p&gt;解决办法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;随机时间：将所有缓存数据设置随机过期时间，防止同一时间同时过期&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        <category term="专项练习" scheme="https://anoxiahub.github.io/categories/special/" />
+        <category term="Redis" scheme="https://anoxiahub.github.io/tags/Redis/" />
+        <updated>2023-08-19T16:00:00.000Z</updated>
+    </entry>
     <entry>
         <id>https://anoxiahub.github.io/interview/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9B%B8%E5%85%B3%E9%9D%A2%E8%AF%95%E9%A2%98/</id>
         <title>多线程相关面试题</title>
@@ -505,7 +714,7 @@
 &lt;/ul&gt;
 </content>
         <category term="面经" scheme="https://anoxiahub.github.io/categories/interview/" />
-        <category term="Java基础" scheme="https://anoxiahub.github.io/tags/Java%E5%9F%BA%E7%A1%80/" />
+        <category term="JVM" scheme="https://anoxiahub.github.io/tags/JVM/" />
         <updated>2023-08-14T16:00:00.000Z</updated>
     </entry>
     <entry>
