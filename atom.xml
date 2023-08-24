@@ -8,8 +8,206 @@
     <author>
       <name>anoxia</name>
     </author>
-    <updated>2023-08-19T16:00:00.000Z</updated>
+    <updated>2023-08-23T16:00:00.000Z</updated>
     <category term="起源" />
+    <entry>
+        <id>https://anoxiahub.github.io/redis/%E7%BC%93%E5%AD%98%E4%B8%89%E5%85%84%E5%BC%9F/</id>
+        <title>缓存三兄弟</title>
+        <link rel="alternate" href="https://anoxiahub.github.io/redis/%E7%BC%93%E5%AD%98%E4%B8%89%E5%85%84%E5%BC%9F/"/>
+        <content type="html">&lt;h1 id=&#34;前言&#34;&gt;&lt;a href=&#34;#前言&#34; class=&#34;headerlink&#34; title=&#34;前言&#34;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;一聊到redis，必不可少的就是缓存三兄弟的问题，即&lt;code&gt;缓存穿透、缓存击穿和缓存雪崩&lt;/code&gt;，这三个问题在业务场景中相对来说比较常见的，也是比较基础的三种问题。那么这三种问题是如何引起的，并且应该如何解决，就是本章探讨的话题。&lt;/p&gt;
+&lt;h1 id=&#34;一、问题前引&#34;&gt;&lt;a href=&#34;#一、问题前引&#34; class=&#34;headerlink&#34; title=&#34;一、问题前引&#34;&gt;&lt;/a&gt;一、问题前引&lt;/h1&gt;&lt;p&gt;大家都知道，Redis一般搭配MySQL来使用，来充当缓存处理一些业务数据。但为什么要Redis用来充当缓存呢，不能直接使用MySQL吗？&lt;/p&gt;
+&lt;p&gt;当然是可以的，但是对于一些&lt;code&gt;请求量大并发次数高&lt;/code&gt;的场景就有问题了。&lt;/p&gt;
+&lt;p&gt;MySQL是基于磁盘的，请求查询速度偏慢，所以就需要一个基于内存的速度快的工具来&lt;code&gt;缓存&lt;/code&gt;这些数据，Redis就应运而生了。而且当大量请求到来时，只有MySQL的话，有可能承受不住大量请求导致MySQL宕机，此时就会影响到整个服务器，所以Redis此时又充当了一个保护&lt;code&gt;缓冲&lt;/code&gt;的作用。&lt;/p&gt;
+&lt;h1 id=&#34;二、缓存穿透&#34;&gt;&lt;a href=&#34;#二、缓存穿透&#34; class=&#34;headerlink&#34; title=&#34;二、缓存穿透&#34;&gt;&lt;/a&gt;二、缓存穿透&lt;/h1&gt;&lt;h2 id=&#34;1-问题描述&#34;&gt;&lt;a href=&#34;#1-问题描述&#34; class=&#34;headerlink&#34; title=&#34;1. 问题描述&#34;&gt;&lt;/a&gt;1. 问题描述&lt;/h2&gt;&lt;p&gt;缓存穿透主要体现在&lt;code&gt;穿透&lt;/code&gt;两个字上，穿透即为穿过缓存，打到数据库上。&lt;/p&gt;
+&lt;p&gt;当一个请求访问的时候，此时Redis没有缓存该数据，然后去数据库查询该数据也查询到，说明没有该数据。&lt;br&gt;&lt;img data-src=&#34;https://anoxia-picgo.oss-cn-beijing.aliyuncs.com/e605571436af4eacaeec0823ab6a0b91.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;此时你或许还不以为然，不就一个空数据吗？多稀罕啊。&lt;/p&gt;
+&lt;p&gt;但如果该请求是恶意请求，此时无数条请求同时访问，缓存中没有，全部都会打在数据库上，刚好还是类似于&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;sql&#34;&gt;select * from table where name = &amp;quot;李白&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;表中有1000万条数据，name字段也没有创建索引。这时候问题是不是就大了？服务器稍微差一点，就会直接宕机。&lt;br&gt;&lt;img data-src=&#34;https://anoxia-picgo.oss-cn-beijing.aliyuncs.com/ac2aefc4bdda4ef89f35fb402e4504da.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这时你或许该问了，那该如何解决呢？不要急，机智的程序猿肯定有应对之法。&lt;/p&gt;
+&lt;h2 id=&#34;2-问题解决&#34;&gt;&lt;a href=&#34;#2-问题解决&#34; class=&#34;headerlink&#34; title=&#34;2. 问题解决&#34;&gt;&lt;/a&gt;2. 问题解决&lt;/h2&gt;&lt;h3 id=&#34;2-1-缓存空数据&#34;&gt;&lt;a href=&#34;#2-1-缓存空数据&#34; class=&#34;headerlink&#34; title=&#34;2.1 缓存空数据&#34;&gt;&lt;/a&gt;2.1 缓存空数据&lt;/h3&gt;&lt;p&gt;如果此时将请求的数据缓存起来，是不是就可以避免请求打到数据库了？&lt;/p&gt;
+&lt;p&gt;你现在或许又要问了，空数据怎么缓存呢？没错，就是&lt;code&gt;缓存空数据&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;如果请求的数据查询数据为空的话，就将该数据为空值缓存到Redis中，以后每次请求都直接访问Redis，查询到该数据，&lt;code&gt;直接返回空值&lt;/code&gt;。这样就避免恶意请求全部打到数据库了。&lt;br&gt;&lt;img data-src=&#34;https://anoxia-picgo.oss-cn-beijing.aliyuncs.com/2a19da38fbc546d5a64a1a1cca53858a.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;2-2-布隆过滤器&#34;&gt;&lt;a href=&#34;#2-2-布隆过滤器&#34; class=&#34;headerlink&#34; title=&#34;2.2 布隆过滤器&#34;&gt;&lt;/a&gt;2.2 布隆过滤器&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;不了解布隆过滤器的同学可以看这篇文章&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC80OTY1ODQ1NDU=&#34;&gt;硬核 | Redis 布隆（Bloom Filter）过滤器原理与实战&lt;/span&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;布隆过滤器 (Bloom Filter)是由 Burton Howard Bloom 于 1970 年提出，它是一种 space efficient 的概率型数据结构，用于判断一个元素是否在集合中。&lt;/p&gt;
+&lt;p&gt;当布隆过滤器说，&lt;code&gt;某个数据存在时，这个数据可能不存在&lt;/code&gt;；当布隆过滤器说，&lt;code&gt;某个数据不存在时，那么这个数据一定不存在&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;哈希表也能用于判断元素是否在集合中，但是布隆过滤器只需要哈希表的 1&amp;#x2F;8 或 1&amp;#x2F;4 的空间复杂度就能完成同样的问题。&lt;/p&gt;
+&lt;p&gt;布隆过滤器&lt;code&gt;可以插入元素，但不可以删除已有元素&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;其中的元素越多，false positive rate(误报率)越大，但是 false negative (漏报)是不可能的。&lt;br&gt;布隆过滤器原理&lt;/p&gt;
+&lt;p&gt;BloomFilter 的算法是，首先分配一块内存空间做 bit 数组，数组的 bit 位初始值全部设为 0。&lt;/p&gt;
+&lt;p&gt;加入元素时，采用 k 个相互独立的 Hash 函数计算，然后将元素 Hash 映射的 K 个位置全部设置为 1。&lt;/p&gt;
+&lt;p&gt;检测 key 是否存在，仍然用这 k 个 Hash 函数计算出 k 个位置，如果位置全部为 1，则表明 key 存在，否则不存在。&lt;/p&gt;
+&lt;p&gt;如下图所示：&lt;br&gt;&lt;img data-src=&#34;https://anoxia-picgo.oss-cn-beijing.aliyuncs.com/3dd7534604e07adb5c0ba98b414b19fb.webp&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;三、缓存击穿&#34;&gt;&lt;a href=&#34;#三、缓存击穿&#34; class=&#34;headerlink&#34; title=&#34;三、缓存击穿&#34;&gt;&lt;/a&gt;三、缓存击穿&lt;/h1&gt;&lt;h2 id=&#34;1-问题描述-1&#34;&gt;&lt;a href=&#34;#1-问题描述-1&#34; class=&#34;headerlink&#34; title=&#34;1. 问题描述&#34;&gt;&lt;/a&gt;1. 问题描述&lt;/h2&gt;&lt;p&gt;缓存击穿一般常见于电商场景，在双十一和六一八这种大促活动中，缓存中会缓存一些热点数据，随时都有大量的请求访问这个数据。&lt;/p&gt;
+&lt;p&gt;当某个时刻这个数据突然过期，大量请求就会集中打到MySQL数据库中。&lt;br&gt;&lt;img data-src=&#34;https://anoxia-picgo.oss-cn-beijing.aliyuncs.com/b4c91fbfab30451cbdfec59d4ae92d50.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如何解决这个问题呢？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;2-问题解决-1&#34;&gt;&lt;a href=&#34;#2-问题解决-1&#34; class=&#34;headerlink&#34; title=&#34;2. 问题解决&#34;&gt;&lt;/a&gt;2. 问题解决&lt;/h2&gt;&lt;p&gt;该问题导致的原因是因为该缓存数据过期了，但却有大量请求访问该数据；&lt;/p&gt;
+&lt;p&gt;有两条思路去解决：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt; 不让该数据过期&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;不让大量请求访问数据库&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-1-设置逻辑过期&#34;&gt;&lt;a href=&#34;#2-1-设置逻辑过期&#34; class=&#34;headerlink&#34; title=&#34;2.1 设置逻辑过期&#34;&gt;&lt;/a&gt;2.1 设置逻辑过期&lt;/h3&gt;&lt;p&gt;热点数据随时都会有变化，不设置过期时间的话会导致更多问题，不能因此失彼。&lt;/p&gt;
+&lt;p&gt;但可以换一个思路，在数据过期时无缝衔接一个新数据，在请求看来这就是没有过期时间的一个数据。&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://anoxia-picgo.oss-cn-beijing.aliyuncs.com/93ac585a9fad4a208ac19a40f434383a.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;此时如果大量请求访问该数据，刚好该数据缓存逻辑过期，但没有设置物理过期时间，所以数据并不会被redis清除。&lt;/p&gt;
+&lt;p&gt;此时由业务代码去判断，该缓存是否过期，如果过期则获取互斥锁&lt;code&gt;新建一个子线程&lt;/code&gt;去访问数据库重新设置缓存，&lt;code&gt;主线程返回过期数据&lt;/code&gt;，没有获取互斥锁的都&lt;code&gt;返回过期数据&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;完整代码如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;java&#34;&gt; //逻辑过期
+    public Shop queryWithLogicalExpire(Long id) &amp;#123;
+        String key = CACHE_SHOP_KEY + id;
+        //1.从redis查询商铺缓存
+        String shopJson = stringRedisTemplate.opsForValue().get(key);
+        //2.判断是否存在
+        if (StrUtil.isBlank(shopJson)) &amp;#123;
+            //3.未命中
+            return null;
+        &amp;#125;
+        //4.命中，需要先把json反序列化为对象
+        RedisData redisData = JSONUtil.toBean(shopJson, RedisData.class);
+        Shop shop = (Shop) redisData.getData();
+        LocalDateTime expireTime = redisData.getExpireTime();
+        //5.判断是否过期
+        if (expireTime.isAfter(LocalDateTime.now())) &amp;#123;
+            //5.1还未过期
+            return shop;
+        &amp;#125;
+        //5.2已经过期，需要缓存重建
+        //6.缓存重建
+        //6.1获取互斥锁
+        String lockKey = LOCK_SHOP_KEY + id;
+        boolean isLock = tryLock(lockKey);
+        //6.2判断是否获取锁成功
+        if (isLock) &amp;#123;
+            // 6.3成功，开启独立线程，实现缓存重建
+            CACHE_REBUILD_EXECUTOR.submit(() -&amp;gt; &amp;#123;
+                try &amp;#123;
+                    //重建缓存
+                    this.saveShop2Redis(id, 20L);
+                &amp;#125; catch (Exception e) &amp;#123;
+                    e.printStackTrace();
+                &amp;#125; finally &amp;#123;
+                    //释放锁
+                    unlock(lockKey);
+                &amp;#125;
+            &amp;#125;);
+        &amp;#125;
+        //6.4返回过期的店铺信息
+        //7.返回
+        return shop;
+    &amp;#125;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;2-2-设置互斥锁&#34;&gt;&lt;a href=&#34;#2-2-设置互斥锁&#34; class=&#34;headerlink&#34; title=&#34;2.2 设置互斥锁&#34;&gt;&lt;/a&gt;2.2 设置互斥锁&lt;/h3&gt;&lt;p&gt;怎么才能不让大量数据去访问数据库呢？&lt;/p&gt;
+&lt;p&gt;或许大家已经想到了，上面设置逻辑过期用到过的一个功能：&lt;code&gt;互斥锁&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://anoxia-picgo.oss-cn-beijing.aliyuncs.com/a8fe33e68ef84d18a37ed5009f5cf40b.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;请求首先访问缓存，如果命中的话，直接返回该数据。&lt;/p&gt;
+&lt;p&gt;如果未命中的话，则去获取互斥锁，获取成功则查询数据库重新设置缓存，获取失败，则&lt;code&gt;重试获取缓存数据&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;完整代码如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;java&#34;&gt;/**
+     * 通过互斥锁机制查询商铺信息
+     * @param key
+     */
+    private Shop queryShopWithMutex(String key, String cityCode) &amp;#123;
+        Shop shop = null;
+        // 1.查询缓存
+        String shopJson = stringRedisTemplate.opsForValue().get(key);
+        // 2.判断缓存是否有数据
+        if (StringUtils.isNotBlank(shopJson)) &amp;#123;
+            // 3.有,则返回
+            shop = JSONObject.parseObject(shopJson, Shop.class);
+            return shop;
+        &amp;#125;
+        // 4.无,则获取互斥锁
+        String lockKey = RedisConstants.LOCK_SHOP_KEY + shopCode;
+        Boolean isLock = tryLock(lockKey);
+        // 5.判断获取锁是否成功
+        try &amp;#123;
+            if (!isLock) &amp;#123;
+                // 6.获取失败, 休眠并重试
+                Thread.sleep(100);
+                return queryShopWithMutex(key, shopCode);
+            &amp;#125;
+            // 7.获取成功, 查询数据库
+            shop = baseMapper.getByCode(shopCode);
+            // 8.判断数据库是否有数据
+            if (shop == null) &amp;#123;
+                // 9.无,则将空数据写入redis
+                stringRedisTemplate.opsForValue().set(key, &amp;quot;&amp;quot;, RedisConstants.CACHE_NULL_TTL, TimeUnit.MINUTES);
+                return null;
+            &amp;#125;
+            // 10.有,则将数据写入redis
+            stringRedisTemplate.opsForValue().set(key, JSONObject.toJSONString(shop), RedisConstants.CACHE_SHOP_TTL, TimeUnit.MINUTES);
+        &amp;#125; catch (Exception e) &amp;#123;
+            throw new RuntimeException(e);
+        &amp;#125; finally &amp;#123;
+            // 11.释放锁
+            unLock(lockKey);
+        &amp;#125;
+        // 12.返回数据
+        return shop;
+    &amp;#125;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;关于两种方案，各有各的优缺点&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;逻辑过期：     及时性高，但数据不是最新数据，适合最终一致性的业务&lt;/li&gt;
+&lt;li&gt;互斥锁： 一致性高，但会有数据延迟，适合强一致性的业务&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;四、缓存雪崩&#34;&gt;&lt;a href=&#34;#四、缓存雪崩&#34; class=&#34;headerlink&#34; title=&#34;四、缓存雪崩&#34;&gt;&lt;/a&gt;四、缓存雪崩&lt;/h1&gt;&lt;h2 id=&#34;1-问题描述-2&#34;&gt;&lt;a href=&#34;#1-问题描述-2&#34; class=&#34;headerlink&#34; title=&#34;1. 问题描述&#34;&gt;&lt;/a&gt;1. 问题描述&lt;/h2&gt;&lt;p&gt;缓存雪崩可以简单的理解为大范围的缓存击穿。&lt;/p&gt;
+&lt;p&gt;有两个可能引起缓存雪崩问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;有大量的热门缓存同时失效&lt;/code&gt;。会导致大量的请求，访问数据库。而数据库很有可能因为扛不住压力，而直接挂掉。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;缓存服务器down机了&lt;/code&gt;，可能是机器硬件问题，或者机房网络问题。造成了整个缓存的不可用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://anoxia-picgo.oss-cn-beijing.aliyuncs.com/332236c568114666ae63f7ad3e20ea9e.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;2-问题解决-2&#34;&gt;&lt;a href=&#34;#2-问题解决-2&#34; class=&#34;headerlink&#34; title=&#34;2. 问题解决&#34;&gt;&lt;/a&gt;2. 问题解决&lt;/h2&gt;&lt;h3 id=&#34;2-1-设置随机过期时间&#34;&gt;&lt;a href=&#34;#2-1-设置随机过期时间&#34; class=&#34;headerlink&#34; title=&#34;2.1 设置随机过期时间&#34;&gt;&lt;/a&gt;2.1 设置随机过期时间&lt;/h3&gt;&lt;p&gt;为了解决缓存雪崩问题，我们首先要尽量&lt;code&gt;避免缓存同时失效&lt;/code&gt;的情况发生。&lt;/p&gt;
+&lt;p&gt;这就要求我们不要设置相同的过期时间。&lt;/p&gt;
+&lt;p&gt;可以在设置的过期时间基础上，再加个1~60秒的随机数。&lt;/p&gt;
+&lt;p&gt;实际过期时间 &amp;#x3D; 过期时间 + 1~60秒的随机数&lt;/p&gt;
+&lt;p&gt;这样即使在高并发的情况下，多个请求同时设置过期时间，由于有随机数的存在，也不会出现太多相同的过期key。&lt;/p&gt;
+&lt;h3 id=&#34;2-2-缓存高可用&#34;&gt;&lt;a href=&#34;#2-2-缓存高可用&#34; class=&#34;headerlink&#34; title=&#34;2.2 缓存高可用&#34;&gt;&lt;/a&gt;2.2 缓存高可用&lt;/h3&gt;&lt;p&gt;针对缓存服务器down机的情况，在前期做系统设计时，可以做一些&lt;code&gt;高可用架构&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt; 可以使用&lt;code&gt;哨兵机制或者集群模式&lt;/code&gt;，当一个Redis宕机，随时会有一个Redis补充上来，避免一个Redis宕机而导致大量请求去访问数据库，而使数据库压力过载。&lt;/p&gt;
+&lt;p&gt;比如使用哨兵模式之后，当某个master服务下线时，自动将该master下的某个slave服务升级为master服务，替代已下线的master服务继续处理请求。&lt;br&gt;&lt;img data-src=&#34;https://anoxia-picgo.oss-cn-beijing.aliyuncs.com/ad2175c7263d69659b48d62f89d1ab03.png&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;总结&#34;&gt;&lt;a href=&#34;#总结&#34; class=&#34;headerlink&#34; title=&#34;总结&#34;&gt;&lt;/a&gt;总结&lt;/h1&gt;&lt;p&gt;缓存穿透、缓存击穿和缓存雪崩是三种与缓存相关的常见问题，它们的概念和影响有所不同。&lt;/p&gt;
+&lt;p&gt;关于Redis缓存三兄弟的问题及解决主要就是以下几个方面：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;缓存穿透：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;缓存穿透指的是对于一个不存在于缓存和数据库中的数据的请求，每次请求都会穿过缓存层直接访问数据库。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;恶意的攻击者可以通过构造不存在的数据请求，导致大量请求直接访问数据库，增加数据库负载压力。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;解决缓存穿透可以采用存储空数据和合适的校验技术，例如使用布隆过滤器等技术，在缓存层进行初步过滤，避免无效请求直接访问数据库。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;   &lt;strong&gt;缓存击穿：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;缓存击穿指的是在高并发情况下，一个热点数据过期或失效时，大量请求同时涌入数据库，造成数据库压力激增。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;由于热点数据没有命中缓存，而直接访问数据库，使得缓存无法发挥作用，增加了数据库的负载。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;解决缓存击穿可以采取设置热点数据永不过期，或者使用互斥锁等机制来控制只有一个线程去加载数据。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;  &lt;strong&gt;缓存雪崩：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;缓存雪崩指的是在某个时间点，缓存中的大量数据同时失效或过期或者缓存服务宕机，导致大量请求直接访问后端数据库，造成数据库压力过大。&lt;/li&gt;
+&lt;li&gt;当缓存中的数据集中过期或失效时，没有缓存可用，导致大量请求直接访问数据库，可能引起数据库负载激增甚至崩溃。&lt;/li&gt;
+&lt;li&gt;解决缓存雪崩可以采用合理的缓存失效时间设置、使用高可用架构等方式来减少缓存失效的风险。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;当然能解决的方式有很多，这里只是列举出来常见的解决方法。如果有更好的建议可以发在评论区。&lt;/p&gt;
+&lt;/blockquote&gt;
+</content>
+        <category term="Redis" scheme="https://anoxiahub.github.io/categories/redis/" />
+        <category term="Redis" scheme="https://anoxiahub.github.io/tags/Redis/" />
+        <updated>2023-08-23T16:00:00.000Z</updated>
+    </entry>
     <entry>
         <id>https://anoxiahub.github.io/special/Redis%E4%B8%93%E9%A1%B9%E9%A2%98%E5%BA%93/</id>
         <title>Redis专项题库-个人练习</title>
